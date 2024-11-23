@@ -1,0 +1,154 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+
+$color-light-1: #fff4e6;
+$color-light-2: #ffe8cc;
+$color-medium: #ffa94d;
+$color-dark: #ff922b;
+$text-color: #495057;
+$btn-text-color: #343a40;
+
+*,
+*::after,
+*::before {
+  padding: 0;
+  margin: 0;
+  box-sizing: inherit;
+}
+
+html {
+  font-size: 62.5%;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  font-family: "Roboto", sans-serif;
+  font-size: 1.6rem;
+  color: $text-color;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.container {
+  display: grid;
+  grid-template-columns: 30rem 50rem;
+  gap: 4rem;
+  min-height: 66vh;
+  @media only screen and (max-width: 600px) {
+    width: 80vw;
+    grid-template-columns: 1fr;
+  }
+}
+
+.sidebar > .btn {
+  float: right;
+  
+}
+
+ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  // gap: .4rem;
+  font-size: 1.4rem;
+  margin-bottom: 2rem;
+
+  li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1rem;
+    border-radius: 0.8rem;
+  }
+
+  li.selected {
+    background-color: $color-light-1;
+  }
+}
+
+form {
+  font-size: 1.6rem;
+  display: grid;
+  align-items: center;
+  gap: 1.2rem;
+  background-color: $color-light-1;
+  border-radius: 0.8rem;
+}
+
+form button {
+  grid-column: 2;
+  margin-top: 1rem;
+}
+
+label {
+  font-weight: 500;
+}
+
+.form-add-player {
+  padding: 1.2rem;
+  grid-template-columns: 1fr 1.5fr;
+  margin-bottom: 1.6rem;
+}
+
+.form-scores {
+  grid-template-columns: 1fr 14rem;
+  padding: 3.2rem 4rem;
+}
+
+form h2 {
+  font-size: 2.2rem;
+  text-transform: uppercase;
+  grid-column: 1/-1;
+  margin-bottom: 1.6rem;
+}
+
+%btn {
+  background-color: $color-medium;
+  color: $btn-text-color;
+  padding: 0.8rem 1.2rem;
+  border-radius: 0.8rem;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s;
+
+  &:hover {
+    background-color: $color-dark;
+  }
+}
+
+.btn {
+  @extend %btn;
+  border: none;
+}
+
+.minus-points {
+  @extend %btn;
+  background-color: rgba(255, 0, 0, 0.8);
+  color: #fff;
+  width: 12rem;
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &:hover {
+    background-color: rgba(255, 0, 0, 0.7);
+  }
+}
+
+input,
+select {
+  font-family: inherit;
+  color: inherit;
+  font-size: 1.5rem;
+  padding: 0.7rem;
+  text-align: center;
+  border: 1px solid $color-light-2;
+  border-radius: 4px;
+  transition: 0.3s;
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border: 1px solid $color-dark;
+}
