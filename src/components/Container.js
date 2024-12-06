@@ -4,24 +4,6 @@ import FormScores from "./FormScores";
 import Button from "./Button";
 import { useState } from "react";
 
-// const initialPlayers = [
-//   {
-//     name: "ahmed",
-//     score: 22,
-//     id: 1,
-//   },
-//   {
-//     name: "marko",
-//     score: 50,
-//     id: 2,
-//   },
-//   {
-//     name: "omar",
-//     score: 122,
-//     id: 3,
-//   },
-// ];
-
 export default function Container() {
   const [players, setPlayers] = useState([]);
   const [addPlayerOpen, setAddPlayerOpen] = useState(false);
@@ -33,7 +15,6 @@ export default function Container() {
 
   function handleAddPlayer(player) {
     setPlayers((players) => [...players, player]);
-    // setAddPlayerOpen(false);
   }
 
   function handleSelection(player) {
@@ -43,24 +24,17 @@ export default function Container() {
     setAddPlayerOpen(false);
   }
 
-  function handleAddScore(value) {
+  function handleScore(value, minus = false) {
     setPlayers((palyers) =>
-      palyers.map((player) =>
-        player.id === selectedPlayer?.id
-          ? { ...player, score: player.score + value }
-          : player
-      )
-    );
-    // setSelectedPlayer(null);
-  }
-
-  function handleMinusScore(value) {
-    setPlayers((players) =>
-      players.map((player) =>
-        player.id === selectedPlayer.id
-          ? { ...player, score: player.score - value }
-          : player
-      )
+      palyers.map((player) => {
+        if (player.id === selectedPlayer?.id) {
+          const modifiedPlayer = minus
+            ? { ...player, score: player.score - value }
+            : { ...player, score: player.score + value };
+          setSelectedPlayer(modifiedPlayer);
+          return modifiedPlayer;
+        } else return player;
+      })
     );
   }
 
@@ -71,6 +45,7 @@ export default function Container() {
           players={players}
           selectedPlayer={selectedPlayer}
           onSelection={handleSelection}
+          key={selectedPlayer?.name}
         />
         {addPlayerOpen && <FormAddPlayer onAddPlayer={handleAddPlayer} />}
         <Button onClick={handleOpenAddPlyer}>
@@ -81,8 +56,8 @@ export default function Container() {
         {selectedPlayer && (
           <FormScores
             selectedPlayer={selectedPlayer}
-            onAddScore={handleAddScore}
-            onMinus={handleMinusScore}
+            onChangeScore={handleScore}
+            key={selectedPlayer.id}
           />
         )}
       </main>
